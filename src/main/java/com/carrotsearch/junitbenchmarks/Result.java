@@ -106,7 +106,8 @@ public final class Result
         try {
             String methodName = getTestMethodName();
             if(methodName.endsWith("]") && methodName.length()>3) {
-                methodName = methodName.substring(0, methodName.length()-3);
+                int lastIdx = methodName.lastIndexOf("[");
+                methodName = methodName.substring(0, lastIdx);
             }
             return getTestClass().getMethod(methodName);
         } catch (NoSuchMethodException e) {

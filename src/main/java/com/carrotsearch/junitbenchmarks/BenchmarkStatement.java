@@ -128,7 +128,8 @@ final class BenchmarkStatement extends Statement
         final BenchmarkEvaluator evaluator;
         String methodName = description.getMethodName();
         if(methodName.endsWith("]") && methodName.length()>3) {
-            methodName = methodName.substring(0, methodName.length()-3);
+            int lastIdx = methodName.lastIndexOf("[");
+            methodName = methodName.substring(0, lastIdx);
         }
         final BenchmarkInvokeMethod test = TestRepository.getTest(new TestId(description.getClassName(), methodName));
         if (concurrency == BenchmarkOptions.CONCURRENCY_SEQUENTIAL)
