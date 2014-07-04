@@ -104,7 +104,11 @@ public final class Result
      */
     public Method getTestMethod() {
         try {
-            return getTestClass().getMethod(getTestMethodName());
+            String methodName = getTestMethodName();
+            if(methodName.endsWith("]") && methodName.length()>3) {
+                methodName = methodName.substring(0, methodName.length()-3);
+            }
+            return getTestClass().getMethod(methodName);
         } catch (NoSuchMethodException e) {
             Logger.getAnonymousLogger().warning(
                 "Could not locate the test method responsible for test: "
